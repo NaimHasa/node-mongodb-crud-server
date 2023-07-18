@@ -27,12 +27,13 @@ async function run() {
     try {
 
         const userCollection = client.db('NodeMongoCurd').collection('users');
-        const user = {
-            name: "Desting",
-            email: "desting@gmail.com"
-        }
-        const result = await userCollection.insertOne(user);
-        console.log(result);
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            // console.log(user);
+
+            const result = await userCollection.insertOne(user)
+            res.send(result);
+        })
 
 
     } finally {
